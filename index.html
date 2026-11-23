@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إلى فاطمة ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark: #0f0714;
+      --bg-card: rgba(30, 16, 40, 0.72);
+      --gold: #f5d076;
+      --gold-soft: #d4af37;
+      --rose: #ff6b9d;
+      --rose-deep: #c93b6b;
+      --text-main: #fdf8f5;
+      --text-muted: #d8c7d4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Cairo', sans-serif;
+      background: radial-gradient(circle at 20% 20%, #2a1038 0%, #14081d 45%, #09040d 100%);
+      color: var(--text-main);
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1rem 4rem;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      filter: blur(110px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    .glow-1 {
+      top: -80px;
+      right: -80px;
+      background: var(--rose-deep);
+    }
+
+    .glow-2 {
+      bottom: -80px;
+      left: -80px;
+      background: #6c2bd9;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 760px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      animation: fadeDown 1s ease forwards;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(245, 208, 118, 0.12);
+      border: 1px solid rgba(245, 208, 118, 0.35);
+      color: var(--gold);
+      font-size: 0.88rem;
+      margin-bottom: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    .title {
+      font-family: 'Amiri', serif;
+      font-size: clamp(2.8rem, 7vw, 4.4rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff5d6 0%, var(--gold) 50%, var(--rose) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.3s ease;
+      line-height: 1.2;
+    }
+
+    .title:hover {
+      transform: scale(1.04);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-top: 0.5rem;
+    }
+
+    .photo-card {
+      width: 100%;
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(245, 208, 118, 0.25);
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.4rem;
+      animation: fadeUp 1.1s ease forwards;
+    }
+
+    .frame-wrapper {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      padding: 7px;
+      background: linear-gradient(135deg, var(--gold), var(--rose), var(--gold-soft));
+      box-shadow: 0 0 35px rgba(255, 107, 157, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #190d22;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .photo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .photo-inner img.visible {
+      display: block;
+    }
+
+    .placeholder-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+    }
+
+    .placeholder-icon {
+      font-size: 2.6rem;
+      color: var(--gold);
+    }
+
+    .placeholder-text {
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.9rem;
+      width: 100%;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 14px;
+      padding: 0.8rem 1.4rem;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-upload {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-upload:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .btn-lock {
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(201, 59, 107, 0.4);
+    }
+
+    .btn-lock:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(201, 59, 107, 0.6);
+    }
+
+    .btn-lock:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-export {
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      color: #1b0f05;
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+    }
+
+    .btn-export:hover {
+      transform: translateY(-2px);
+    }
+
+    .lock-status {
+      font-size: 0.88rem;
+      color: var(--gold);
+      background: rgba(245, 208, 118, 0.1);
+      border: 1px solid rgba(245, 208, 118, 0.25);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      display: none;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .lock-status.active {
+      display: inline-flex;
+    }
+
+    .main-message {
+      width: 100%;
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 107, 157, 0.22);
+      border-radius: 26px;
+      padding: 2rem;
+      text-align: center;
+      line-height: 2;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    .main-message h2 {
+      font-family: 'Amiri', serif;
+      font-size: 1.9rem;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .main-message p {
+      font-size: 1.08rem;
+      color: var(--text-main);
+    }
+
+    .quotes-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .quote-card {
+      background: rgba(26, 14, 35, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 20px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      position: relative;
+    }
+
+    .quote-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 208, 118, 0.35);
+    }
+
+    .quote-card span {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .quote-card p {
+      font-family: 'Amiri', serif;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: #f7eaf4;
+    }
+
+    .footer-action {
+      margin-top: 0.5rem;
+    }
+
+    .btn-hearts {
+      background: rgba(255, 107, 157, 0.14);
+      border: 1px solid rgba(255, 107, 157, 0.4);
+      color: #ffb3cd;
+      border-radius: 999px;
+      padding: 0.65rem 1.5rem;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-hearts:hover {
+      background: rgba(255, 107, 157, 0.26);
+      transform: scale(1.05);
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 1.4rem;
+      pointer-events: none;
+      z-index: 999;
+      animation: floatUp 3.2s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-95vh) scale(1.5) rotate(18deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <main class="container">
+    <header class="header">
+      <div class="badge">✨ مساحة خاصة لا تتغير أبداً ✨</div>
+      <h1 class="title" id="fatimaTitle" title="اضغط لنثر القلوب">فاطمة</h1>
+      <p class="subtitle">اسمٌ يختصر الجمال، ووجهٌ يُشبه الطمأنينة</p>
+    </header>
+
+    <section class="photo-card">
+      <div class="frame-wrapper">
+        <div class="photo-inner">
+          <img id="displayImage" alt="صورة فاطمة" />
+          <div class="placeholder-content" id="placeholderBox">
+            <div class="placeholder-icon">🌸</div>
+            <div class="placeholder-text">اختر صورة فاطمة لتثبيتها هنا إلى الأبد</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lock-status" id="lockStatus">
+        🔒 تم تثبيت الصورة وقفل التعديل نهائياً
+      </div>
+
+      <div class="controls" id="editControls">
+        <input type="file" id="imageInput" accept="image/*" hidden />
+        <button type="button" class="btn btn-upload" id="chooseBtn">
+          📷 اختيار صورة
+        </button>
+        <button type="button" class="btn btn-lock" id="lockBtn" disabled>
+          🔒 تثبيت الصورة وقفل التعديل نهائياً
+        </button>
+      </div>
+
+      <div class="controls" id="lockedControls" style="display: none;">
+        <button type="button" class="btn btn-export" id="exportBtn">
+          📥 تحميل نسخة مقفولة بالصورة لمشاركتها
+        </button>
+      </div>
+    </section>
+
+    <section class="main-message">
+      <h2>إلى صاحبة الاسم الأجمل.. فاطمة</h2>
+      <p>
+        يا فاطمة، لاسمكِ في القلب وقعٌ يشبه المطر الأول بعد طول انتظار، ولحضوركِ سكينةٌ تُرمم كل ما أتعبته الأيام.
+        أنتِ لستِ مجرد اسمٍ عابر، بل حكايةُ نورٍ ودفء، وضحكةٌ تُعيد ترتيب الفوضى بداخل الروح.
+        حفظكِ الله وجعل أيامكِ تشبه نقاء قلبكِ وجمال ملامحكِ دائماً.
+      </p>
+    </section>
+
+    <section class="quotes-grid">
+      <article class="quote-card">
+        <span>🌙</span>
+        <p>«كأنَّ الحسنَ أُعطيَ نصفَهُ لِفاطمة، والنصفَ الآخرَ توزّعَ على بقيةِ العالم.»</p>
+      </article>
+      <article class="quote-card">
+        <span>🌷</span>
+        <p>«في ملامحِ فاطمة طمأنينةُ وطن، وفي صوتها هدوءُ الليل حين يصفو.»</p>
+      </article>
+      <article class="quote-card">
+        <span>✨</span>
+        <p>«كلُّ الأشياءِ الجميلةِ تليقُ بكِ يا فاطمة، لأنكِ أصلُ الجمالِ ومنتهاه.»</p>
+      </article>
+      <article class="quote-card">
+        <span>🤍</span>
+        <p>«ثابتةٌ في القلبِ كهذه الصورة تماماً، لا يغيرها زمنٌ ولا يمحوها عابر.»</p>
+      </article>
+    </section>
+
+    <div class="footer-action">
+      <button type="button" class="btn-hearts" id="heartsBtn">💖 نثر القلوب لفاطمة</button>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const STORAGE_IMG_KEY = 'fatima_locked_photo_v1';
+      const STORAGE_LOCK_KEY = 'fatima_is_locked_v1';
+
+      const imageInput = document.getElementById('imageInput');
+      const chooseBtn = document.getElementById('chooseBtn');
+      const lockBtn = document.getElementById('lockBtn');
+      const exportBtn = document.getElementById('exportBtn');
+      const displayImage = document.getElementById('displayImage');
+      const placeholderBox = document.getElementById('placeholderBox');
+      const editControls = document.getElementById('editControls');
+      const lockedControls = document.getElementById('lockedControls');
+      const lockStatus = document.getElementById('lockStatus');
+      const heartsBtn = document.getElementById('heartsBtn');
+      const fatimaTitle = document.getElementById('fatimaTitle');
+
+      let currentDataUrl = '';
+
+      function applyLockedState(imgSrc) {
+        displayImage.src = imgSrc;
+        displayImage.classList.add('visible');
+        placeholderBox.style.display = 'none';
+
+        if (editControls) editControls.remove();
+        if (imageInput) imageInput.remove();
+
+        lockStatus.classList.add('active');
+        if (lockedControls) lockedControls.style.display = 'flex';
+      }
+
+      const preEmbeddedSrc = displayImage.getAttribute('src');
+      const isPreLocked = document.documentElement.getAttribute('data-permanently-locked') === 'true';
+
+      if (isPreLocked && preEmbeddedSrc) {
+        applyLockedState(preEmbeddedSrc);
+      } else {
+        const savedLock = localStorage.getItem(STORAGE_LOCK_KEY);
+        const savedImg = localStorage.getItem(STORAGE_IMG_KEY);
+        if (savedLock === 'true' && savedImg) {
+          currentDataUrl = savedImg;
+          applyLockedState(savedImg);
+        }
+      }
+
+      if (chooseBtn && imageInput) {
+        chooseBtn.addEventListener('click', () => {
+          imageInput.click();
+        });
+
+        imageInput.addEventListener('change', (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            currentDataUrl = event.target.result;
+            displayImage.src = currentDataUrl;
+            displayImage.classList.add('visible');
+            placeholderBox.style.display = 'none';
+            lockBtn.disabled = false;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      if (lockBtn) {
+        lockBtn.addEventListener('click', () => {
+          if (!currentDataUrl) return;
+          const confirmed = confirm(
+            'تنبيه نهائي: بعد تثبيت الصورة سيتم قفل التعديل نهائياً ولن يتمكن أي شخص من تغييرها. هل أنت متأكد؟'
+          );
+          if (!confirmed) return;
+
+          try {
+            localStorage.setItem(STORAGE_IMG_KEY, currentDataUrl);
+            localStorage.setItem(STORAGE_LOCK_KEY, 'true');
+          } catch (err) {}
+
+          applyLockedState(currentDataUrl);
+          spawnHearts(14);
+        });
+      }
+
+      if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+          const cloneDoc = document.documentElement.cloneNode(true);
+          cloneDoc.setAttribute('data-permanently-locked', 'true');
+
+          const clonedImg = cloneDoc.querySelector('#displayImage');
+          if (clonedImg) {
+            clonedImg.setAttribute('src', displayImage.src);
+            clonedImg.classList.add('visible');
+          }
+
+          const clonedPlaceholder = cloneDoc.querySelector('#placeholderBox');
+          if (clonedPlaceholder) clonedPlaceholder.style.display = 'none';
+
+          const clonedEdit = cloneDoc.querySelector('#editControls');
+          if (clonedEdit) clonedEdit.remove();
+
+          const clonedInput = cloneDoc.querySelector('#imageInput');
+          if (clonedInput) clonedInput.remove();
+
+          const clonedExport = cloneDoc.querySelector('#lockedControls');
+          if (clonedExport) clonedExport.remove();
+
+          const clonedStatus = cloneDoc.querySelector('#lockStatus');
+          if (clonedStatus) clonedStatus.classList.add('active');
+
+          const htmlContent = '<!DOCTYPE html>\n' + cloneDoc.outerHTML;
+          const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'فاطمة_مقفول.html';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      }
+
+      function spawnHearts(count = 8) {
+        const symbols = ['💖', '🌸', '✨', '🤍', '🌷'];
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            heart.style.left = Math.random() * 90 + 5 + 'vw';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3300);
+          }, i * 120);
+        }
+      }
+
+      heartsBtn.addEventListener('click', () => spawnHearts(10));
+      fatimaTitle.addEventListener('click', () => spawnHearts(8));
+    })();
+  </script>
+</body>
+</html>
